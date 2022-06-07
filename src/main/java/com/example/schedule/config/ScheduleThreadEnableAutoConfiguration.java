@@ -8,6 +8,7 @@ import com.example.schedule.service.CustomScheduleService;
 import com.example.schedule.sys.CustomScheduleCommandLine;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import org.springframework.util.ErrorHandler;
 public class ScheduleThreadEnableAutoConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean
     public TaskScheduler scheduledThreadPoolExecutor(){
         ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
         threadPoolTaskScheduler.setPoolSize(10);
@@ -40,11 +42,13 @@ public class ScheduleThreadEnableAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public CustomLock customLock(){
         return new DefaultCustomLock();
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public ScheduleLogger scheduleLogger(){
         return new DefaultScheduleLogger();
     }
