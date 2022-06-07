@@ -6,6 +6,7 @@ import com.example.schedule.config.logger.DefaultScheduleLogger;
 import com.example.schedule.config.logger.ScheduleLogger;
 import com.example.schedule.service.CustomScheduleService;
 import com.example.schedule.sys.CustomScheduleCommandLine;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,6 +21,7 @@ import org.springframework.util.ErrorHandler;
  */
 @Configuration
 @ComponentScan("com.example.schedule")
+@MapperScan("com.example.schedule")
 public class ScheduleThreadEnableAutoConfiguration {
 
     @Bean
@@ -35,11 +37,6 @@ public class ScheduleThreadEnableAutoConfiguration {
         threadPoolTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler-");
         threadPoolTaskScheduler.setRemoveOnCancelPolicy(true);
         return threadPoolTaskScheduler;
-    }
-
-    @Bean
-    public CustomScheduleService customScheduleService(){
-        return new CustomScheduleService();
     }
 
     @Bean

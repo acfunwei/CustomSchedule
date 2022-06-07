@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * 多个任务仅允许启动一个任务
@@ -13,7 +16,7 @@ import java.util.Set;
 public class DefaultCustomLock implements CustomLock{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultCustomLock.class);
-    private static Set<String> lockSet = new LinkedHashSet<>(1>>5);
+    private static Vector<String> lockSet = new Vector<>(1>>5);
 
 
     @Override

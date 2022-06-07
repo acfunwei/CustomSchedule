@@ -1,13 +1,16 @@
 package com.example.schedule.config.logger;
 
+import com.example.schedule.sys.bean.FbpSysJobs;
+
 /**
  * @author ZW
  */
 public interface ScheduleLogger {
     /**
      * 执行日志
-     * @param logStr
+     * @param fbpSysJobs
+     * @param message
      */
-    void logger(String logStr);
+    void logger(FbpSysJobs fbpSysJobs, String message);
 
 }
