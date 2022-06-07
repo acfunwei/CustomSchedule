@@ -5,11 +5,13 @@ import com.example.schedule.config.bean.CustomScheduleBean;
 import com.example.schedule.mapper.FbpSysJobsMapper;
 import com.example.schedule.service.CustomScheduleService;
 import com.example.schedule.sys.bean.FbpSysJobs;
+import com.example.schedule.util.SnowFlakeUidGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Wrapper;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public class CustomScheduleCommandLine implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         QueryWrapper wrapper = new QueryWrapper<FbpSysJobs>();
-        wrapper.eq("enableFlag", 1);
+        wrapper.eq("ENABLE_FLAG", 1);
         List<FbpSysJobs> fbpSysJobs = fbpSysJobsMapper.selectList(wrapper);
         for (FbpSysJobs fbpSysJob : fbpSysJobs) {
             customScheduleService.addTask(CustomScheduleBean.getInstance(fbpSysJob));

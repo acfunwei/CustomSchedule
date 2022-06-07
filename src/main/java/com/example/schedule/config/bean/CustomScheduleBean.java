@@ -15,7 +15,6 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Optional;
@@ -70,8 +69,8 @@ public abstract class CustomScheduleBean implements Runnable {
         } finally {
             //完成解锁
             stopWatch.stop();
-            LOGGER.info("任务[{}]完成共花费{}秒", fbpSysJobs.getJobCode(), stopWatch.getTotalTimeSeconds());
-            scheduleLogger.logger(fbpSysJobs, StringUtils.isEmpty(errorMsg) ? MessageFormat.format("执行成功共花费{0}S", stopWatch.getTotalTimeSeconds()) : errorMsg);
+//            LOGGER.info("任务[{}]完成共花费{}秒", fbpSysJobs.getJobCode(), stopWatch.getTotalTimeMillis());
+            scheduleLogger.logger(fbpSysJobs, StringUtils.isEmpty(errorMsg) ? MessageFormat.format("执行成功共花费{0}ms", stopWatch.getTotalTimeMillis()) : errorMsg);
             customLock.unlock(fbpSysJobs.getJobCode());
         }
 
@@ -87,9 +86,9 @@ public abstract class CustomScheduleBean implements Runnable {
         if(!StringUtils.isEmpty(fbpSysJobs.getCornExpress())){
             return new CronTrigger(fbpSysJobs.getCornExpress());
         }
-        if(!StringUtils.isEmpty(fbpSysJobs.getPeriod())){
-            TimeUnit timeUnit = TimeUnit.valueOf(fbpSysJobs.getPeriod());
-            return new PeriodicTrigger(fbpSysJobs.getInterval(), timeUnit);
+        if(!StringUtils.isEmpty(fbpSysJobs.getTimeUnit())){
+            TimeUnit timeUnit = TimeUnit.valueOf(fbpSysJobs.getTimeUnit());
+            return new PeriodicTrigger(fbpSysJobs.getIntervalNum(), timeUnit);
         }
         throw new IllegalArgumentException(MessageFormat.format("定时任务[{0}]参数配置错误请检查定时器触发方式", fbpSysJobs.getJobCode()));
     }

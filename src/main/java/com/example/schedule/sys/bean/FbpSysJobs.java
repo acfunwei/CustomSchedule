@@ -9,15 +9,10 @@ import java.util.Date;
 public class FbpSysJobs {
 	private static final long serialVersionUID = 1L;
 	private Long id;
-
 	private Date createDate;
-
 	private String createBy;
-
 	private Date updateDate;
-
 	private String updateBy;
-
 	private Short enableFlag;
 	/*** 任务编号 */
 	private String jobCode;
@@ -31,9 +26,9 @@ public class FbpSysJobs {
 	 */
 	private String cornExpress;
 
-	private String period;
+	private String timeUnit;
 
-	private Integer interval;
+	private Integer intervalNum;
 
 	/*** 备注 */
 	private String remark;
@@ -142,19 +137,19 @@ public class FbpSysJobs {
 		this.cornExpress = cornExpress;
 	}
 
-	public String getPeriod() {
-		return period;
+	public String getTimeUnit() {
+		return timeUnit;
 	}
 
-	public void setPeriod(String period) {
-		this.period = period;
+	public void setTimeUnit(String timeUnit) {
+		this.timeUnit = timeUnit;
 	}
 
-	public Integer getInterval() {
-		return interval;
+	public Integer getIntervalNum() {
+		return intervalNum;
 	}
 
-	public void setInterval(Integer interval) {
-		this.interval = interval;
+	public void setIntervalNum(Integer intervalNum) {
+		this.intervalNum = intervalNum;
 	}
 }
