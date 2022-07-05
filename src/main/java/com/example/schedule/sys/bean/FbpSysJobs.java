@@ -38,6 +38,8 @@ public class FbpSysJobs {
 	private Date syncDate;
 	/*** 接口指定特殊参数，JSON格式 */
 	private String parameter;
+
+	private Integer version;
 	public String getJobCode() {
 		return jobCode;
 	}
@@ -151,5 +153,13 @@ public class FbpSysJobs {
 
 	public void setIntervalNum(Integer intervalNum) {
 		this.intervalNum = intervalNum;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

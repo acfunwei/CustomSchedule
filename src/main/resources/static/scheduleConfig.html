@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <title>定时任务配置</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/jquery.min.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务编号</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="jobCode" required  lay-verify="required" placeholder="请输入任务编号" name="jobCode">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务名称</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="jobName" placeholder="请输入任务名称" name="jobName" required lay-verify="required">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务类型</label>
+        <div class="layui-input-block">
+            <select id="jobType" title="请选择任务类型" name="jobType">
+                <option value="methodCustomScheduleBean">本地方法</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">执行方式</label>
+        <div class="layui-input-block">
+            <select id="taskType" lay-filter="taskType">
+                <option value="0">循环执行</option>
+                <option value="1">设置执行</option>
+            </select>
+        </div>
+    </div>
+    <div id="taskType0">
+        <div class="layui-form-item">
+            <label class="layui-form-label">执行方式</label>
+            <div class="layui-input-block">
+                <select id="timeUnit" name="timeUnit">
+                    <option value="SECONDS">秒</option>
+                    <option value="MINUTES">分</option>
+                    <option value="HOURS">时</option>
+                    <option value="DAYS">日</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">时间间隔</label>
+            <div class="layui-input-block">
+                <input type="number" class="layui-input" id="intervalNum" placeholder="请输入时间间隔" name="intervalNum">
+            </div>
+        </div>
+    </div>
+    <div id="taskType1">
+        <div class="layui-form-item">
+            <label class="layui-form-label">执行方式</label>
+            <div class="layui-input-block">
+                <select id="timeCron" name="timeCron" lay-filter="timeCron">
+                    <option value="0">每小时</option>
+                    <option value="1">每日</option>
+                    <option value="2">每月</option>
+                    <option value="3">每年</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">具体时间</label>
+            <div class="layui-inline">
+                <span id="detailTime3" style="display:none;">
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input">
+                    </div>
+                     月
+                </span>
+                <span id="detailTime2" style="display:none;">
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input">
+                    </div>
+                    日
+                </span>
+                <span id="detailTime1" style="display:none;">
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input">
+                    </div>
+                    时
+                </span>
+                <span id="detailTime0">
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input">
+                    </div>
+                    分
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" rows="5" id="remark" name="remark"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  });
+  form.on("select(taskType)", function(data){
+        $("div[id^=taskType]").hide();
+        $("#taskType" + data.value).show();
+  });
+  form.on("select(timeCron)", function(data){
+        for(let i=0; i <= data.value; i++){
+            $("#detailTime" + i).show();
+        }
+        for(let i=Number(data.value) + 1; i <=3; i++){
+            $("#detailTime" + i).hide();
+        }
+  });
+  form.on("select(timeCron)", function(data){
+        for(let i=0; i <= data.value; i++){
+            $("#detailTime" + i).show();
+        }
+        for(let i=Number(data.value) + 1; i <=3; i++){
+            $("#detailTime" + i).hide();
+        }
+  });
+});
+</script>
+</body>
+</html>
